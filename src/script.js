@@ -35,8 +35,8 @@ const atualizarDimensoesCanvas =()=> {
  */
 const scene = new THREE.Scene()
 
-// HDR (RGBE) equirectangular - > 3 - 5 - 6 - 11
-rgbeLoader.load('/environmentMaps/nuppgin_render6.hdr', (environmentMap) =>
+// HDR (RGBE) equirectangular
+rgbeLoader.load('/environment_map.hdr', (environmentMap) =>
 {
     environmentMap.mapping = THREE.EquirectangularReflectionMapping
     // scene.background = environmentMap
@@ -70,7 +70,7 @@ const dracoLoader = new DRACOLoader()
 gltfLoader.setDRACOLoader(dracoLoader)
 
 gltfLoader.load(
-    '/models/if_logo_3d_2.glb',
+    '/if_logo_3d.glb',
     (gltf) =>
     {
         gltf.scene.rotation.y = -2.3

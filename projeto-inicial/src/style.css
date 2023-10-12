@@ -1,5 +1,6 @@
 *
 {
+    /* Css reset - Remove margens, paddings padrão de todos os elementos html e define a borda de cada elemento como o limite que ele pode ocupar de espaço */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,13 +9,21 @@
 html,
 body
 {
+
+    /* dvh (dynamic view height)- Nova medida css que permite ajustar 100% da altura de forma acertiva tanto em desktops quando em dispositivos móveis */
+    height: 100dvh; 
     width: 100%;
-    height: 100dvh;
-    background-image: url("/img/background.png");
+
+    /* Define uma imagem como fundo da tela */
+    background-image: url("/background.png");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+
+    /* Define a fonte do texto da página */
     font-family: 'Inter', sans-serif;
+
+    /* Alinha o filho (container) no centro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,15 +31,19 @@ body
 }
 
 .container{
+    /* Tamanho do container */
     width: 90%;
     max-width: 500px;
+
+    /* Alinhamento e posicionamento dos filhos do container */
     display: flex;
     flex-direction: column;
     gap: 24px;
-    /* border: 1px solid red; */
+   
 }
 
 .webgl{
+    /* Aparência */
     outline: none;
     background: rgba(14, 14, 14,0.65);
     border-radius: 5px;
@@ -39,16 +52,17 @@ body
     border-style: dashed;
     border-spacing: inherit;
 
+    /* Icone do cursor ("setinha do mouse") */
     &:hover{
         cursor: grab;
     }
     &:active{
         cursor: grabbing;
     }
-
 }
 
 h1{
+    /* Aparência */
     background: linear-gradient(to bottom, #FFFFFF 0%, #BABABA 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -58,6 +72,7 @@ h1{
 }
 
 p{
+    /* Aparência */
     color: white;
     font-size: 1.125rem;
 }

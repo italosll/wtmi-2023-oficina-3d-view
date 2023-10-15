@@ -148,3 +148,59 @@ renderer.toneMapping  =  THREE.ACESFilmicToneMappingToneMapping
 renderer.toneMappingExposure  =  0.5
 ```
 Entenda esse Recurso como um filtro aplicado no renderizador, produz um resultado semelhante a um filtro de pós-processamento de imagem, neste caso também atuando sobre a iluminação.
+
+
+Carregue o modelo 3D:
+
+```js
+/**
+ * Carregar Modelo 3D
+ */
+const dracoLoader = new DRACOLoader()
+gltfLoader.setDRACOLoader(dracoLoader)
+
+gltfLoader.load(
+    '/if_logo_3d.glb',
+    (gltf) =>
+    {
+        gltf.scene.rotation.y = -2.3
+        gltf.scene.position.set(-0.5, -2.5, 0.5)
+        scene.add(gltf.scene)
+    }
+)
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+scene.add(ambientLight)
+```
+
+Além de carregar o modelo, aqui definimos também a rotação e posição do modelo, para que ele fique exatamente no centro da nossa cena, tanto no eixo vertical quanto no eixo horizontal, e a rotação para que o objeto fique de "frente" para a camera. 
+
+Falando em câmera, vamos adicioná-la a seguir:
+```js
+/**
+ * Camera perspectiva
+ */
+const camera = new THREE.PerspectiveCamera(25, dimensoesCanvas.width / dimensoesCanvas.height, 14, 19)
+camera.position.set(  12, 0,12  )
+scene.add(camera)
+```
+Vamos habilitar os controles para manipular a cena (arrastar e soltar): 
+```js
+/**
+ * Controle (arrastar e soltar)
+ */
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+```
+Por fim vamos criar a função tick, e chamar ela logo em seguida:
+```js
+const tick = () =>
+{
+    controls.update() // Atualizar Damping
+    renderer.render(scene, camera) // Renderizar o frame atual
+    window.requestAnimationFrame(tick)// Chamar tick() novamente no próximo frame (recursivamente)
+}
+
+tick()
+```
+O nome da função (tick) pouco importa nesse caso, o fundamental é que exista uma função que no mínimo renderize a cena e chame a si mesma no proximo frame, como essa é uma chamada recursiva, a cada frame essa função realizar o render de uma imagem, e conforme os frames vao sendo renderizados nos é transmitida a sensação de manipulação em ambiente 3d em tempo real.
